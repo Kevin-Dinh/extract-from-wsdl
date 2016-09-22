@@ -5,11 +5,12 @@ dir="out/service.port.operation/"
 servicelist="services.txt"
 
 get_operations() {
-  while IFS= read -r port
+  while read port
   do
     operations=`xmlstarlet sel --comp -N wsdl="http://schemas.xmlsoap.org/wsdl/" -t -m "//wsdl:portType[@name='$port']/wsdl:operation/@name" -v "." -n $wsdl`
-    # Write ports to file servicename.ports.txt
+    # Write operations to file servicename.ports.operations.txt
     echo "$operations" > "$dir$1.$port".operations.txt
+    # Prefix list of operations with corresponding service and port. Write to file.
     prefix="$1.$port."
     port_operations=`nl -s "$prefix" "$dir$1.$port".operations.txt | cut -c7-`
     echo "$port_operations" > "$dir$1.$port".operations.txt
@@ -17,14 +18,14 @@ get_operations() {
   done < $2
 }
 
-# // List ALL services. Save to file.
+# // List ALL services.
 xmlstarlet sel --comp -N wsdl="http://schemas.xmlsoap.org/wsdl/" -t -m " //wsdl:service/@name" -v "." -n $1 > "$servicelist"
 # Create directory to store generated files
 mkdir -p "$dir"
 
-while IFS= read -r service
+while read service
 do
-  # List ALL ports under ONE SERVICE given the service name as constraint. Save to file.
+  # List ALL ports under ONE SERVICE given the service name as constraint.
   ports=`xmlstarlet sel --comp -N wsdl="http://schemas.xmlsoap.org/wsdl/" -t -m "//wsdl:service[@name='$service']/wsdl:port/@name" -v "." -n $wsdl`
   # Write ports to file servicename.ports.txt
   echo "$ports" > "$service".ports.txt
