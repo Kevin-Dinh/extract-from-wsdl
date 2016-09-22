@@ -14,7 +14,6 @@ get_operations() {
     prefix="$1.$port."
     port_operations=`nl -s "$prefix" "$dir$1.$port".operations.txt | cut -c7-`
     echo "$port_operations" > "$dir$1.$port".operations.txt
-
   done < $2
 }
 
@@ -30,8 +29,9 @@ do
   # Write ports to file servicename.ports.txt
   echo "$ports" > "$service".ports.txt
   get_operations $service "$service".ports.txt
-
 done < "$servicelist"
 
+cat $dir/* > out/service-port-ops.txt
+
 # Cleanup generated temp files
-rm $servicelist *.ports.txt
+rm -fr $servicelist *.ports.txt $dir

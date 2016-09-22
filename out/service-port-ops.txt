@@ -1,0 +1,6 @@
+GlobalWeather.GlobalWeatherHttpGet.GetWeather
+GlobalWeather.GlobalWeatherHttpGet.GetCitiesByCountry
+GlobalWeather.GlobalWeatherHttpPost.GetWeather
+GlobalWeather.GlobalWeatherHttpPost.GetCitiesByCountry
+GlobalWeather.GlobalWeatherSoap.GetWeather
+GlobalWeather.GlobalWeatherSoap.GetCitiesByCountry
