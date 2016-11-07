@@ -7,3 +7,5 @@
 	./bin/extract-from-wsdl ./test/fixtures/sample.WSDL
 
 
+$ Output
+	out/services-port-ops.txt
